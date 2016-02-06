@@ -1,0 +1,5 @@
+# Ignore these folders:
+/node_modules/
+
+# Ignore these files:
+/server.js
