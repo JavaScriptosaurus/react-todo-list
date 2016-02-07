@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "react-transform-display-name": "^0.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
