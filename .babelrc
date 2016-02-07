@@ -4,8 +4,9 @@
         "development": {
             "plugins": [
                 ["react-transform", {
-                    "transforms": [
-                        {
+                    "transforms": [{
+                            "transform": "react-transform-display-name"
+                        }, {
                             "transform": "react-transform-hmr",
                             "imports": ["react"],
                             "locals": ["module"]
