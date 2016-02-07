@@ -1,3 +1,6 @@
-import view from './views/view.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-view.init();
+import TodoApp from './views/view.jsx';
+
+ReactDOM.render(<TodoApp />, document.querySelector('div'));
