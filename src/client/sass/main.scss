@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Lora:400|Source+Sans+Pro:300);
+@import '~normalize.css/normalize';
+
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome';
+
+$cream: rgb(255, 255, 157);
+$cream-outline: $cream - 10%;
+$darkgrey: rgb(72, 72, 72);
+$mediumgrey: rgb(128, 128, 128);
+$deepgreen: rgb(0, 163, 136);
+$lightgreen: rgb(190, 235, 159);
+$mediumgreen: rgb(121, 189, 143);
+$orange: rgb(255, 97, 56);
+
+.todo-app {
+    font-family: 'Source Sans Pro';
+    max-width: 24em;
+    line-height: 1.25;
+    color: $darkgrey;
+    padding: 1em;
+
+    font-size: 1em; // Testing scaling
+}
+
+button {
+    font-size: 1em;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    cursor: pointer;
+    margin-left: 0.75em;
+    outline: 0;
+    width: 3.25em;
+    height: 3.25em;
+
+    &:hover:not(:disabled) {
+        background: #fff;
+        color: currentColor;
+    }
+
+    &:focus:not(:disabled) {
+        color: $darkgrey;
+        border-color: currentColor;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+    }
+}
+
+@import './components/itemList';
+@import './components/insertItem';

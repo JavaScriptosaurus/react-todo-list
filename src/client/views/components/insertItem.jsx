@@ -4,7 +4,9 @@ export default React.createClass({
 
     getInitialState: function () {
         return {
-            text: ''
+            title: '',
+            description: '',
+            dueDate: new Date()
         };
     },
 
@@ -23,12 +25,13 @@ export default React.createClass({
 
     render: function () {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    <span>Add item</span>
-                    <input onChange={this.onChange} value={this.state.text} />
-                </label>
-                <button>+</button>
+            <form className='insert-item' onSubmit={this.handleSubmit}>
+                <input onChange={this.onChange} value={this.state.title} />
+                <input onChange={this.onChange} value={this.state.description} />
+                <input onChange={this.onChange} value={this.state.dueDate} />
+                <button aria-label='Add list item'>
+                    <i className='fa fa-2x fa-plus'></i>
+                </button>
             </form>
         );
     }

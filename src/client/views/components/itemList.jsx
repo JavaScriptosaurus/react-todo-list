@@ -1,22 +1,30 @@
 import React from 'react';
 
+import TodoItem from './TodoItem.jsx';
+
 export default React.createClass({
 
-    onClick: function (index) {
-        this.props.onRemove(index);
-    },
-
     render: function () {
-        const items = this.props.items.map((item, index) => {
+        const inEdit = this.props.inEdit;
+        const items = this.props.items.map(({description, dueDate, title}, index) => {
+            const isDisabled = inEdit !== false && inEdit !== index;
+            const isEditing = inEdit === index;
             return (
-                <li key={index}>
-                    {item}
-                    <button onClick={this.onClick.bind(this, index)} type="button">X</button>
-                </li>
+                <TodoItem
+                    key={index}
+                    description={description}
+                    dueDate={dueDate}
+                    index={index}
+                    inEdit={isEditing}
+                    isDisabled={isDisabled}
+                    onDelete={this.props.onDelete}
+                    onEdit={this.props.handleEdit}
+                    onUpdate={this.props.onUpdate}
+                    title={title} />
             );
         });
         return (
-            <ol>
+            <ol className='item-list'>
                 {items}
             </ol>
         );
