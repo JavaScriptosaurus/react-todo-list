@@ -23,6 +23,12 @@ module.exports = {
             loaders: ['babel'],
             exclude: /(node_modules)/,
             include: path.join(__dirname, 'src')
+        }, {
+            test: /\.scss$/,
+            loaders: ["style", "css", "sass"]
+        }, {
+            test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif)/,
+            loader: "file-loader"
         }]
     }
 };

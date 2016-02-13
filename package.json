@@ -16,17 +16,21 @@
     "babel-preset-react": "^6.3.13",
     "css-loader": "^0.23.1",
     "eslint": "^1.10.3",
+    "file-loader": "^0.8.5",
+    "font-awesome": "^4.5.0",
+    "node-sass": "^3.4.2",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "react-transform-render-visualizer": "^0.4.0",
     "redbox-react": "^1.2.2",
+    "sass-loader": "^3.1.2",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.6.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-noserver": "./node_modules/.bin/webpack-dev-server --inline --hot",
+    "dev-noserver": "webpack-dev-server --inline --hot",
     "dev": "node ./src/server/server -webpack",
     "start": "node ./src/server/server"
   },
