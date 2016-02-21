@@ -1,0 +1,41 @@
+li {
+    display: block;
+    margin-bottom: 1em;
+    border-radius: .25em;
+    border: 1px solid $cream-outline;
+}
+
+article {
+    padding: 1em;
+    background: $cream;
+    border-radius: .25em .25em 0 0;
+
+    h2 {
+        margin-top: .25em;
+        font-weight: 300;
+        color: $deepgreen;
+    }
+
+    p {
+        font-family: 'Lora';
+    }
+}
+
+menu {
+    margin: 0;
+    padding: 1em;
+    border-radius: 0 0 .25em .25em;
+    background: $cream-outline;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .due-date {
+        flex-grow: 1;
+    }
+
+    .button-delete:not(:disabled) {
+        color: $orange;
+    }
+
+}
