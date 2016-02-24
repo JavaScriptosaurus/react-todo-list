@@ -1,41 +1,101 @@
 li {
     display: block;
     margin-bottom: 1em;
-    border-radius: .25em;
+    border-radius: $borderRadius;
     border: 1px solid $cream-outline;
+
+    &.item-leave {
+        max-height: 100em;
+        transition:
+            max-height .15s .15s,
+            opacity .20s .1s,
+            // http://easings.net/#easeInBack
+            transform .30s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+        &.item-leave-active {
+            max-height: 0;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+    }
+
+    &.item-enter {
+        max-height: 0;
+        opacity: 0;
+        transform: scale(0);
+        transition:
+            max-height .15s,
+            opacity .25s .1s,
+            // http://easings.net/#easeOutBack
+            transform .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &.item-enter-active {
+            max-height: 100em;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+    }
+
 }
 
 article {
     padding: 1em;
     background: $cream;
-    border-radius: .25em .25em 0 0;
+    border-radius: $borderRadius $borderRadius 0 0;
 
     h2 {
         margin-top: .25em;
+        font-family: $sans-serif;
         font-weight: 300;
         color: $deepgreen;
     }
 
-    p {
-        font-family: 'Lora';
-    }
 }
 
 menu {
     margin: 0;
     padding: 1em;
-    border-radius: 0 0 .25em .25em;
+    border-radius: 0 0 $borderRadius $borderRadius;
     background: $cream-outline;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     .due-date {
+        font-family: $sans-serif;
         flex-grow: 1;
     }
 
     .button-delete:not(:disabled) {
         color: $orange;
+    }
+
+}
+
+button {
+    font-size: 1em;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: $borderRadius;
+    cursor: pointer;
+    margin-left: .75em;
+    outline: 0;
+    width: 3.25em;
+    height: 3.25em;
+
+    &:hover:not(:disabled) {
+        background: #fff;
+        color: currentColor;
+    }
+
+    &:focus {
+        border-color: $darkgrey;
+    }
+
+    &:disabled {
+        opacity: .5;
     }
 
 }

@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import setCursorToEnd from '../../utils/contentEditableCursorToEnd.js';
 
 export default React.createClass({
 
     getInitialState: function () {
-        const {description, dueDate, title} = this.props;
+        const {description, dueDate, uuid, title} = this.props;
         return {
             inEdit: this.props.inEdit,
             description,
             dueDate: dueDate.toDateString(),
+            uuid,
             title
         };
     },
@@ -20,14 +22,14 @@ export default React.createClass({
     },
 
     componentDidUpdate: function () {
-        if (this.state.inEdit) {
+        if (this.state.inEdit && this.state.awaitingFocus) {
             this.focusOnHeading();
+            this.setState({awaitingFocus: false});
         }
     },
 
     focusOnHeading: function () {
-        ReactDOM.findDOMNode(this).getElementsByTagName('h2')[0].focus();
-        // TODO: Make focus at end of line.
+        setCursorToEnd(ReactDOM.findDOMNode(this).getElementsByTagName('h2')[0]);
     },
 
     getActionButtons: function (isDisabled) {
@@ -82,14 +84,14 @@ export default React.createClass({
         this.props.onEdit(false);
     },
 
-    handleChange: function (state, e) {
+    handleChange: function (state, event) {
         if (state === 'dueDate') {
             // TODO: Handle date?
             // Maybe we should have a datepicker (HTML5 type=date input)?
         }
         // TODO: Handle <br> tags before stripping.
         // IDEA: Markup editor?
-        this.setState({[state]: e.target.textContent});
+        this.setState({[state]: event.target.textContent});
     },
 
     handleDelete: function () {
@@ -99,21 +101,23 @@ export default React.createClass({
     handleEdit: function () {
         this.setState({inEdit: true});
         this.props.onEdit(this.props.index);
+        this.setState({awaitingFocus: true});
     },
 
     handleSave: function () {
-        const {description, dueDate, title} = this.state;
+        const {description, dueDate, uuid, title} = this.state;
         this.setState({inEdit: false});
         this.props.onEdit(false);
         this.props.onUpdate(this.props.index, {
             description,
             dueDate: new Date(dueDate),
+            uuid,
             title
         });
     },
 
     render: function () {
-        const {index, title, description, dueDate, isDisabled} = this.props;
+        const {title, description, dueDate, isDisabled} = this.props;
         const inEdit = this.state.inEdit;
         const html = {
             description: {
@@ -127,7 +131,7 @@ export default React.createClass({
             }
         };
         return (
-            <li key={index}>
+            <li>
                 <article>
                     <h2
                         contentEditable={inEdit}

@@ -1,17 +1,35 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import TodoItem from './TodoItem.jsx';
+import TodoItem from './todoItem.jsx';
 
 export default React.createClass({
 
+    checkSearch: function (itemText) {
+        return itemText.toLowerCase()
+            .match(this.props.searchText.toLowerCase());
+    },
+
     render: function () {
         const inEdit = this.props.inEdit;
-        const items = this.props.items.map(({description, dueDate, title}, index) => {
-            const isDisabled = inEdit !== false && inEdit !== index;
+        const items = this.props.items.map(({description, dueDate, uuid, title}, index) => {
+
             const isEditing = inEdit === index;
+
+            /*
+             * Check if the item matches our search string, returns nothing if
+             * item doesn't match search. Items in edit are excluded.
+             */
+            if (!this.checkSearch(`${title} ${description} ${dueDate.toDateString()}`) && !isEditing) {
+                return;
+            }
+
+            const isDisabled = inEdit !== false && inEdit !== index;
+
             return (
                 <TodoItem
-                    key={index}
+                    key={uuid}
+                    uuid={uuid}
                     description={description}
                     dueDate={dueDate}
                     index={index}
@@ -24,9 +42,14 @@ export default React.createClass({
             );
         });
         return (
-            <ol className='item-list'>
-                {items}
-            </ol>
+                <ReactCSSTransitionGroup
+                    className='item-list'
+                    component='ol'
+                    transitionName='item'
+                    transitionLeaveTimeout={300}
+                    transitionEnterTimeout={350}>
+                    {items}
+                </ReactCSSTransitionGroup>
         );
     }
 

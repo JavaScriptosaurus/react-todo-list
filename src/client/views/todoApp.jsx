@@ -1,7 +1,8 @@
 import React from 'react';
+import UUID from 'uuid';
 
 import ItemList from './components/itemList.jsx';
-import InsertItem from './components/insertItem.jsx';
+import Search from './components/search.jsx';
 
 /**
  * TODO:
@@ -19,14 +20,17 @@ export default React.createClass({
                 description: `This is where you would write details of your
                     upcoming event.`,
                 dueDate: new Date('2016-09-16 17:30'),
-                title: 'Example item'
+                title: 'Example item',
+                uuid: UUID.v4()
             }, {
                 description: `You can write whatever you want, as long as it
                     helps you to reach your dreams 💖`,
                 dueDate: new Date('2016-12-31 11:59'),
-                title: 'A second example'
+                title: 'A second example',
+                uuid: UUID.v4()
             }],
-            inEdit: false
+            inEdit: false,
+            searchText: ''
         };
     },
 
@@ -35,7 +39,8 @@ export default React.createClass({
         items.push({
             description: `New item description.`,
             dueDate: new Date(),
-            title: 'New item heading'
+            title: 'New item heading',
+            uuid: UUID.v4()
         });
         this.updateState({
             inEdit: items.length - 1},
@@ -63,6 +68,10 @@ export default React.createClass({
         this.setState({inEdit: index});
     },
 
+    handleSearch: function (searchText) {
+        this.setState({searchText});
+    },
+
     handleUpdate: function (index, todoItem) {
         const items = this.state.items;
         items[index] = todoItem;
@@ -75,16 +84,22 @@ export default React.createClass({
     },
 
     render: function () {
+        const inEdit = this.state.inEdit !== false;
         return (
             <div className='todo-app'>
                 <h1>React To-Do App</h1>
+                <Search
+                    searchText={this.state.searchText}
+                    onSearch={this.handleSearch}
+                    inEdit={this.state.inEdit} />
                 <ItemList
                     inEdit={this.state.inEdit}
                     items={this.state.items}
                     handleEdit={this.handleEdit}
                     onDelete={this.handleDelete}
-                    onUpdate={this.handleUpdate} />
-                <button type='button' onClick={this.insertItem}>Add item...</button>            </div>
+                    onUpdate={this.handleUpdate}
+                    searchText={this.state.searchText} />
+                <button                    className='add-item'                    type='button'                    onClick={this.insertItem}                    disabled={inEdit}>                    Add to-do item                    <i className='fa fa-plus'></i>                </button>            </div>
         );
     }
 
