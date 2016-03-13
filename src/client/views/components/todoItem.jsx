@@ -75,12 +75,16 @@ export default React.createClass({
     },
 
     handleBack: function () {
-        const {description, dueDate, title} = this.props;
-        this.setState({
-            inEdit: false,
-            description,
-            dueDate: dueDate.toDateString(),
-            title});
+        const {description, dueDate, title, isNewItem} = this.props;
+        if (isNewItem) {
+            this.handleDelete();
+        } else {
+            this.setState({
+                inEdit: false,
+                description,
+                dueDate: dueDate.toDateString(),
+                title});
+        }
         this.props.onEdit(false);
     },
 
