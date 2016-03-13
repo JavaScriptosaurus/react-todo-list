@@ -12,7 +12,7 @@ export default React.createClass({
 
     render: function () {
         const inEdit = this.props.inEdit;
-        const items = this.props.items.map(({description, dueDate, uuid, title}, index) => {
+        const items = this.props.items.map(({description, dueDate, uuid, title, addingNewItem}, index) => {
 
             const isEditing = inEdit === index;
 
@@ -38,7 +38,8 @@ export default React.createClass({
                     onDelete={this.props.onDelete}
                     onEdit={this.props.handleEdit}
                     onUpdate={this.props.onUpdate}
-                    title={title} />
+                    title={title}
+                    addingNewItem={addingNewItem} />
             );
         });
         return (

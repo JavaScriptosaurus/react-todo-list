@@ -40,7 +40,8 @@ export default React.createClass({
             description: `New item description.`,
             dueDate: new Date(),
             title: 'New item heading',
-            uuid: UUID.v4()
+            uuid: UUID.v4(),
+            addingNewItem: true
         });
         this.updateState({
             inEdit: items.length - 1},
