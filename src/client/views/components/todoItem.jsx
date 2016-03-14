@@ -19,6 +19,11 @@ export default React.createClass({
         if (this.state.inEdit) {
             this.focusOnHeading();
         }
+
+        if (this.props.isNewItem) {
+            ReactDOM.findDOMNode(this)
+                .addEventListener('transitionend', this.scrollToElement);
+        }
     },
 
     componentDidUpdate: function () {
@@ -119,6 +124,15 @@ export default React.createClass({
             uuid,
             title
         });
+    },
+
+    scrollToElement: function () {
+        const bounds = ReactDOM.findDOMNode(this).getBoundingClientRect();
+        const isVisible = (bounds.top >= 0) && (bounds.bottom <= window.innerHeight);
+
+        if (!isVisible) {
+            window.scrollBy(0, bounds.bottom - bounds.top);
+        }
     },
 
     render: function () {
