@@ -1,0 +1,27 @@
+.search {
+    cursor: pointer;
+    display: block;
+    margin-bottom: 1em;
+
+    div {
+        padding: 1em 0;
+    }
+
+    i {
+        margin-left: .5em;
+    }
+
+    input {
+        padding: 1em;
+        border: 1px solid $lightgrey;
+        border-radius: $borderRadius;
+        width: 100%;
+
+        &:focus {
+            border-color: currentColor;
+            outline: 0;
+        }
+
+    }
+
+}
