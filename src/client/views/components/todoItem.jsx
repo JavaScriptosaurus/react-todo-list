@@ -29,7 +29,8 @@ export default React.createClass({
     },
 
     focusOnHeading: function () {
-        setCursorToEnd(ReactDOM.findDOMNode(this).getElementsByTagName('h2')[0]);
+        setCursorToEnd(ReactDOM.findDOMNode(this)
+            .getElementsByTagName('h2')[0]);
     },
 
     getActionButtons: function (isDisabled) {

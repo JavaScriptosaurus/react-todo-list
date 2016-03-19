@@ -12,15 +12,17 @@ export default React.createClass({
 
     render: function () {
         const inEdit = this.props.inEdit;
-        const items = this.props.items.map(({description, dueDate, uuid, title, isNewItem}, index) => {
-
+        const items = this.props.items.map((item, index) => {
+            const {description, dueDate, uuid, title, isNewItem} = item;
             const isEditing = inEdit === index;
 
             /*
              * Check if the item matches our search string, returns nothing if
              * item doesn't match search. Items in edit are excluded.
              */
-            if (!this.checkSearch(`${title} ${description} ${dueDate.toDateString()}`) && !isEditing) {
+            const searchMatch = this.checkSearch(`${title} ${description} ` +
+                `${dueDate.toDateString()}`);
+            if (!searchMatch && !isEditing) {
                 return;
             }
 
