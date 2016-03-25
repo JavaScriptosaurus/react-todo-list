@@ -21,8 +21,8 @@ export default React.createClass({
         }
 
         if (this.props.isNewItem) {
-            let el = ReactDOM.findDOMNode(this);
-            el.addEventListener('transitionend', this.scrollToElement);
+            ReactDOM.findDOMNode(this)
+                .addEventListener('transitionend', this.scrollToElement);
         }
     },
 
@@ -126,7 +126,7 @@ export default React.createClass({
         });
     },
 
-    scrollToElement: function (event) {
+    scrollToElement: function () {
         const bounds = ReactDOM.findDOMNode(this).getBoundingClientRect();
         const isVisible = (bounds.top >= 0) && (bounds.bottom <= window.innerHeight);
 
